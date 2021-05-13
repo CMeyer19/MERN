@@ -1,41 +1,22 @@
-'use strict'
-
-import cors from 'cors';
-import express from 'express';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
-
+const express = require('express');
 const app = express();
-const router = express.Router();
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const mongoose = require('mongoose');
+const PORT = 4000;
 
-// env variables
-const PORT = process.env.PORT || 3000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/mern-starter';
+app.use(cors());
+app.use(bodyParser.json());
+mongoose.connect('mongodb://127.0.0.1:27017/todos', { useNewUrlParser: true });
 
-mongoose.Promise = Promise;
-mongoose.connect(MONGODB_URI);
+const connection = mongoose.connection;
 
-app.use(bodyParser.json(),cors())
-
-app.use(require('../route/auth-router'));
-
-app.all('*', (request, response) => {
-  console.log('Returning a 404 from the catch-all route');
-  return response.sendStatus(404);
+connection.once('open', function() {
+  console.log('MongoDB database connection established successfully');
 });
 
-// error middleware
-app.use(require('./error-middleware'));
-
-
-export const start = () => {
-  app.listen(PORT, () =>{
-    console.log(`Listening on port: ${PORT}`)
-  })
-}
-
-export const stop = () => {
-  app.close(PORT, () => {
-    console.log(`Shut down on port: ${PORT}`)
-  })
-}
+exports.start = () => {
+  app.listen(PORT, () => {
+    console.log(`Listening on port: ${PORT}`);
+  });
+};
