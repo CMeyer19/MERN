@@ -2,7 +2,7 @@
 
 const { Router } = require('express');
 const bodyParser = require('body-parser');
-const User = require('../model/user.js');
+const User = require('../model/todo.js');
 const router = module.exports = new Router();
 
 router.post('/api/hello', bodyParser, (req, res, next) => {
