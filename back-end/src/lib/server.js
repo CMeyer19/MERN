@@ -11,7 +11,13 @@ let Todo = require('../model/todo');
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/todos', { useNewUrlParser: true });
+mongoose.connect(
+  'mongodb://127.0.0.1:27017/todos',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+);
 const connection = mongoose.connection;
 
 connection.once('open', function() {
