@@ -8,6 +8,7 @@ import EditTodo from './components/edit-todo.component';
 import TodosList from './components/todos-list.component';
 
 import logo from './logo.png';
+import StringGeneratorComponent from './components/string-generator.component';
 
 class App extends Component {
   render() {
@@ -46,6 +47,12 @@ class App extends Component {
                     className="nav-link"
                   >Create Todo</Link>
                 </li>
+                <li className="navbar-item">
+                  <Link
+                    to="/string-generator"
+                    className="nav-link"
+                  >String generator</Link>
+                </li>
               </ul>
             </div>
           </nav>
@@ -62,6 +69,10 @@ class App extends Component {
           <Route
             path="/create"
             component={CreateTodo}
+          />
+          <Route
+            path="/string-generator"
+            component={StringGeneratorComponent}
           />
         </div>
       </Router>

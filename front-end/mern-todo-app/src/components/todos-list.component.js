@@ -20,7 +20,6 @@ export default class TodosList extends Component {
   }
 
   componentDidMount() {
-    console.log('Mount');
     axios.get('http://localhost:4000/todos/')
       .then((response) => {
         this.setState({ todos: response.data });
