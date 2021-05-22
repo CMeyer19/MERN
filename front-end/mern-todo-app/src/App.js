@@ -14,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container">
+        <div>
           <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a
               class="navbar-brand"
