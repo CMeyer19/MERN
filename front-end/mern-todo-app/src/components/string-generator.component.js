@@ -6,10 +6,12 @@ export default class StringGeneratorComponent extends Component {
 
     this.onChangeStringLength = this.onChangeStringLength.bind(this);
     this.generateString = this.generateString.bind(this);
+    this.onChangeStringAmount = this.onChangeStringAmount.bind(this);
 
     this.state = {
       value: '',
-      stringLength: 0
+      stringLength: 0,
+      stringAmount: 0
     };
   }
 
@@ -23,15 +25,29 @@ export default class StringGeneratorComponent extends Component {
     return result.join('');
   }
 
+  onChangeValue() {
+
+  }
+
   generateString() {
+    let finalResult = '';
+    for (let i = 0; i < this.state.stringAmount; i++) {
+      finalResult += this.generateRandomString() + '\r\n';
+    }
     this.setState({
-      value: this.generateRandomString()
+      value: finalResult
     });
   }
 
   onChangeStringLength(e) {
     this.setState({
       stringLength: e.target.value
+    });
+  }
+
+  onChangeStringAmount(e) {
+    this.setState({
+      stringAmount: e.target.value
     });
   }
 
@@ -52,6 +68,18 @@ export default class StringGeneratorComponent extends Component {
             onChange={this.onChangeStringLength}
           />
         </div>
+        <div
+          style={{ marginTop: 10 }}
+          className="form-group"
+        >
+          <label>Amount: </label>
+          <input
+            type="number"
+            className="form-control"
+            value={this.state.stringAmount}
+            onChange={this.onChangeStringAmount}
+          />
+        </div>
         <button
           style={{ marginTop: 10 }}
           type="button"
@@ -64,15 +92,15 @@ export default class StringGeneratorComponent extends Component {
           className="form-group"
         >
           <label>Value: </label>
-          <input
-            type="text"
+          <textarea
+            onChange={this.onChangeValue}
             className="form-control"
             value={this.state.value}
+            rows={5}
           />
         </div>
       </div>
     );
   }
-
 
 }
